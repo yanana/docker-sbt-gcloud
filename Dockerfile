@@ -8,7 +8,7 @@ ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
 ENV PATH /google-cloud-sdk/bin:$PATH
 ENV HOME /
 
-RUN apk --update --no-cache add py2-pip py-crcmod git tar gzip bash curl && \
+RUN apk --update --no-cache add py2-pip py-crcmod git tar gzip bash curl tzdata && \
   pip install crcmod && \
   curl https://sdk.cloud.google.com | bash && \
   gcloud components update && \
