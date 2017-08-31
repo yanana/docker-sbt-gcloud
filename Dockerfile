@@ -1,16 +1,16 @@
 FROM frolvlad/alpine-oraclejdk8:8.141.15-slim
 
-ENV SBT_VERSION 0.13.16
+ENV SBT_VERSION 1.0.0-RC2
 
 ENV CLOUDSDK_CORE_DISABLE_PROMPTS 1
 ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
 
-ENV DOCKER_VERSION 17.06.0-ce
+ENV DOCKER_VERSION 17.05.0-ce
 
 ENV PATH /google-cloud-sdk/bin:$PATH
 ENV HOME /
 
-RUN apk --update --no-cache add py2-pip py-crcmod git tar gzip bash curl tzdata ncurses gettext jq && \
+RUN apk --update --no-cache add py2-pip py-crcmod git tar gzip bash curl sed tzdata ncurses gettext jq && \
   pip install crcmod && \
   curl https://sdk.cloud.google.com | bash && \
   gcloud components update && \
