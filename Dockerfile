@@ -11,7 +11,7 @@ ENV DOCKER_VERSION 17.07.0-ce
 ENV PATH /google-cloud-sdk/bin:$PATH
 ENV HOME /
 
-RUN apk --update --no-cache add py2-pip py-crcmod git tar gzip bash curl sed tzdata ncurses gettext jq && \
+RUN apk --update --no-cache add py2-pip py-crcmod git tar gzip bash curl sed tzdata ncurses gettext jq bc && \
   pip install crcmod && \
   curl https://sdk.cloud.google.com | bash && \
   gcloud components update && \
