@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:8.181.13-slim
+FROM openjdk:11-jdk-slim
 
 ENV SBT_VERSION 1.2.6
 
@@ -11,7 +11,8 @@ ENV DOCKER_VERSION 18.05.0-ce
 ENV PATH /google-cloud-sdk/bin:$PATH
 ENV HOME /
 
-RUN apk --update --no-cache add py2-pip py-crcmod git tar gzip bash curl sed tzdata ncurses gettext jq bc && \
+RUN apt-get -qq update && \
+  apt-get -qq install -y --no-install-recommends python-pip python-crcmod git tar gzip bash curl sed tzdata gettext jq bc && \
   pip install crcmod && \
   curl https://sdk.cloud.google.com | bash && \
   gcloud components update && \
@@ -28,7 +29,7 @@ RUN apk --update --no-cache add py2-pip py-crcmod git tar gzip bash curl sed tzd
   rm docker.tgz && \
   # curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz && \
   # tar --strip-components=1 -xvzf docker-${DOCKER_VERSION}.tgz -C /usr/local/bin && \
-  /usr/local/lib/sbt/bin/sbt update # For pre-fetching
+  /usr/local/lib/sbt/bin/sbt updateSbtClassifiers # For pre-fetching
 
 ENV PATH $PATH:/usr/local/lib/sbt/bin
 ENV HOME /root
